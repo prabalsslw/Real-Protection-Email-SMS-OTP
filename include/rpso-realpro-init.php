@@ -4,6 +4,8 @@
  **/
 defined( 'ABSPATH' ) or die(); 
 
+use Realpro\Rewrite\Rules\RPSO_Rewrite_Rules_Login;
+
 class rpso_realpro_init {
 
 	public static function rpso_realpro_install() {
@@ -63,10 +65,6 @@ class rpso_realpro_init {
 	    }
 
 	    add_option( 'rpso_db_version', $rpso_db_version );
-
-	    // rpso_init_internal();
-	    // rpso_re_init_internal();
-	    flush_rewrite_rules();
 
 	}
 

@@ -23,31 +23,26 @@
 
 	$options = get_option( 'rpso_realpro_setting' );
 
-	// echo "<pre>";
-	// print_r($options);
-	// echo "</pre>";exit;
+	require_once plugin_dir_path( __FILE__ ).'/admin/rpso-realpro-admin.php';
+	require_once plugin_dir_path( __FILE__ ).'/templete/rpso-registration-field.php';
+	require_once plugin_dir_path( __FILE__ ).'/templete/rpso-rewrite-rules-login.php';
+	require_once plugin_dir_path( __FILE__ ).'/templete/rpso-login-process.php';
 
-	/**
-	 * Load the default settings
-	 */
 
-	require_once __DIR__.'/admin/rpso-realpro-admin.php';
-	require_once __DIR__.'/templete/rpso-registration-field.php';
-	require_once __DIR__.'/class/class-rpso-rewrite-rules-login.php';
-	require_once __DIR__.'/templete/rpso-login-process.php';
 
 	use Realpro\Rewrite\Rules\RPSO_Rewrite_Rules_Login;
-
-
+	
 	add_action('plugins_loaded', array(RPSO_Rewrite_Rules_Login::get_instance(), 'setup'));
+
 
 
 	register_activation_hook( __FILE__, 'rpso_realpro_active' );
 
 	function rpso_realpro_active() {
-
 		require_once plugin_dir_path( __FILE__ ) . 'include/rpso-realpro-init.php';
 		rpso_realpro_init::rpso_realpro_install();
+		RPSO_Rewrite_Rules_Login::rpso_login_rewrite_rules();
+		flush_rewrite_rules();
 	}
 
 	/**

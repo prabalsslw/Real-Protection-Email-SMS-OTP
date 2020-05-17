@@ -56,7 +56,7 @@ class RPSO_Login_Process
                     )
                 );
 
-                wp_redirect( home_url() . "/rpso-verify-login/" . $user_hash . "/");
+                wp_redirect( home_url() . "/verify-login/" . $user_hash . "/");
             } 
             elseif ( ( current_time( 'timestamp' ) - strtotime( $login_attempt->login_time ) ) > $rpso_settings['timeout'] * MINUTE_IN_SECONDS ) 
             {
@@ -85,11 +85,11 @@ class RPSO_Login_Process
                     )
                 );
 
-                wp_redirect( home_url() . "/rpso-verify-login/" . $user_hash . "/");
+                wp_redirect( home_url() . "/verify-login/" . $user_hash . "/");
             } 
             else 
             {
-                wp_redirect( home_url() . "/rpso-verify-login/" . $login_attempt->auth_token . "/");
+                wp_redirect( home_url() . "/verify-login/" . $login_attempt->auth_token . "/");
             }
 
             exit;
